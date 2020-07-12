@@ -18,7 +18,7 @@ public class UserController {
 
     // Get all users
     @GetMapping("/user")
-    public List<User> getAllNotes() {
+    public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
