@@ -3,6 +3,8 @@ package com.example.smartcustomerretention.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 //Model class for user table with getter and setters
 @Entity
@@ -47,6 +49,14 @@ public class User {
     }
 
     public void setCreatedAt(String createdTime) {
-        this.createdTime = createdTime;
+        Price p = new Price();
+        this.createdTime = p.currentTime();
+    }
+
+    public String currentTime(){
+        LocalDateTime myDateObj = LocalDateTime.now();
+        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        String formattedDate = myDateObj.format(myFormatObj);
+        return formattedDate;
     }
 }

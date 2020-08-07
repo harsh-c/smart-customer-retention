@@ -2,6 +2,8 @@ package com.example.smartcustomerretention.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 // This table contains just the mapping of referred users.
 // user id and referred id should match to a record in the user table
@@ -25,12 +27,6 @@ public class ReferralUser {
     @Column(name = "create_time")
     private String createdTime;
 
-//    @Column(name = "username", nullable = false)
-//    String userName;
-//
-//    @Column(name = "referreduser", nullable = false)
-//    String referredUser;
-
     //getter
     public int getUserId() {
         return userId;
@@ -42,13 +38,6 @@ public class ReferralUser {
         return createdTime;
     }
 
-//    public String getUserName() {
-//        return userName;
-//    }
-//    public String getReferredUserName() {
-//        return referredUser;
-//    }
-
     // setter
     public void setUserId(int userId) {
         this.userId = userId;
@@ -59,14 +48,13 @@ public class ReferralUser {
     }
 
     public void setCreatedAt(String createdTime) {
-        this.createdTime = createdTime;
+        Price p = new Price();
+        this.createdTime = p.currentTime();
     }
-
-//    public void setUserName(String userName) {
-//        this.userName = userName;
-//    }
-//    public void setReferredUserName(String referredUser) {
-//        this.referredUser = referredUser;
-//    }
-
+    public String currentTime(){
+        LocalDateTime myDateObj = LocalDateTime.now();
+        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        String formattedDate = myDateObj.format(myFormatObj);
+        return formattedDate;
+    }
 }

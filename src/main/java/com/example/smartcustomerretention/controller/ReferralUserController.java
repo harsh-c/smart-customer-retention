@@ -4,8 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.example.smartcustomerretention.repository.ReferralUserRepository;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @RestController
@@ -23,10 +21,7 @@ public class ReferralUserController {
     // Add a mapping in referral users
     @PostMapping("/referral_user")
     public ReferralUser addReferralUser(@RequestBody ReferralUser referralUser){
-        LocalDateTime myDateObj = LocalDateTime.now();
-        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-        String formattedDate = myDateObj.format(myFormatObj);
-        referralUser.setCreatedAt(formattedDate);
+        referralUser.setCreatedAt(referralUser.getCreatedAt());
 
         return referralUserRepository.save(referralUser);
     }
